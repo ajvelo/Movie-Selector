@@ -14,7 +14,7 @@ struct ContentView : View {
         NavigationView {
             VStack(alignment: .center) {
                 if viewmodel.loading {
-//                    ActivityIndicator(color: Color.blue, size: 50)
+                    ActivityIndicator(color: Color.blue, size: 50)
                 } else {
                     if (viewmodel.movies.results.count > 0) {
                         List(viewmodel.movies.results) { movie in
