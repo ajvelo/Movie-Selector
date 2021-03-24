@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ContentView : View {
-    @ObservedObject var viewmodel = MovieViewModel(service: APIService())
+    @ObservedObject var viewmodel = MovieViewModel()
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
@@ -18,10 +18,9 @@ struct ContentView : View {
                 } else {
                     if (viewmodel.movies.results.count > 0) {
                         List(viewmodel.movies.results) { movie in
-                            Text(movie.title)
-//                            NavigationLink(destination: MovieDetails(movie: movie)){
-//                                MovieRow(movie: movie)
-//                            }
+                            NavigationLink(destination: MovieDetails(movie: movie)){
+                                MovieRow(movie: movie)
+                            }
                         }
                     } else {
                         VStack(alignment: .center) {

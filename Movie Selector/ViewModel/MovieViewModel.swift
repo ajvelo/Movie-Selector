@@ -13,7 +13,7 @@ class MovieViewModel: ObservableObject {
     @Published var loading = false
 
     let service: ServiceProtocol
-    init(service: ServiceProtocol) {
+    init(service: ServiceProtocol = APIService()) {
         self.service = service
     }
     
