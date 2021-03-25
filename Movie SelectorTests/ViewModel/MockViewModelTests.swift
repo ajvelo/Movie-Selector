@@ -10,28 +10,15 @@ import XCTest
 @testable import Movie_Selector
 
 class MovieViewModelTests: XCTestCase {
-
-    func testSuccessFetchData() {
-        let expectedList = [Movie.with()]
-        let service = MockService(mockData: expectedList)
-        
-        let viewModel = MovieViewModel(service: service)
-        
-        
-        viewModel.loadData()
-        
-        XCTAssertTrue(!viewModel.loading)
-        XCTAssertEqual(viewModel.movies.results.count, 1)
-    }
     
     func testEmptyData() {
         let expectedList = [Movie]()
         let service = MockService(mockData: expectedList)
         
-        let viewModel = MovieViewModel(service: service)
+        let viewModel = MovieViewModel(networkService: service)
         
         
-        viewModel.loadData()
+        viewModel.load(page: 0)
         
         XCTAssertTrue(!viewModel.loading)
         XCTAssertEqual(viewModel.movies.results.count, 0)
@@ -41,10 +28,10 @@ class MovieViewModelTests: XCTestCase {
         let expectedList: [Movie]? = nil
         let service = MockService(mockData: expectedList)
         
-        let viewModel = MovieViewModel(service: service)
+        let viewModel = MovieViewModel(networkService: service)
         
         
-        viewModel.loadData()
+        viewModel.load(page: 0)
         
         XCTAssertTrue(!viewModel.loading)
         XCTAssertEqual(viewModel.movies.results.count, 0)

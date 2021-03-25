@@ -14,7 +14,7 @@ class MovieViewModel: ObservableObject {
 
     private var bag: [AnyCancellable] = []
     let networkService: NetworkServiceProtocol
-    init(networkService: NetworkServiceProtocol = NetworkService()) {
+    init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
     }
     

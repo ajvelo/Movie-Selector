@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ContentView : View {
-    @ObservedObject var viewmodel = MovieViewModel()
+    @ObservedObject var viewmodel = MovieViewModel(networkService: NetworkService())
     @State var currentPage = 1
     var body: some View {
         NavigationView {
