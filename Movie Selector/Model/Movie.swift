@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Codable, Identifiable{
+struct Movie: Codable, Identifiable, Equatable {
     var popularity: Float
     var vote_count: Int
     var id: Int

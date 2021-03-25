@@ -8,30 +8,26 @@
 import Foundation
 import Alamofire
 
-public struct NOURLEncoding: ParameterEncoding {
+public struct NoURLEncoding: ParameterEncoding {
 
-    //protocol implementation
     public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
         var urlRequest = try urlRequest.asURLRequest()
 
         guard let parameters = parameters else { return urlRequest }
 
-        if HTTPMethod(rawValue: urlRequest.httpMethod ?? "GET") != nil {
-            guard let url = urlRequest.url else {
-                throw AFError.parameterEncodingFailed(reason: .missingURL)
-            }
+        guard let url = urlRequest.url else {
+            throw AFError.parameterEncodingFailed(reason: .missingURL)
+        }
 
-            if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), !parameters.isEmpty {
-                let percentEncodedQuery = (urlComponents.percentEncodedQuery.map { $0 + "&" } ?? "") + query(parameters)
-                urlComponents.percentEncodedQuery = percentEncodedQuery
-                urlRequest.url = urlComponents.url
-            }
+        if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), !parameters.isEmpty {
+            let percentEncodedQuery = (urlComponents.percentEncodedQuery.map { $0 + "&" } ?? "") + query(parameters)
+            urlComponents.percentEncodedQuery = percentEncodedQuery
+            urlRequest.url = urlComponents.url
         }
 
         return urlRequest
     }
 
-    //append query parameters
     private func query(_ parameters: [String: Any]) -> String {
         var components: [(String, String)] = []
 
@@ -43,7 +39,6 @@ public struct NOURLEncoding: ParameterEncoding {
         return components.map { "\($0)=\($1)" }.joined(separator: "&")
     }
 
-    //Alamofire logic for query components handling
     public func queryComponents(fromKey key: String, value: Any) -> [(String, String)] {
         var components: [(String, String)] = []
 
@@ -70,8 +65,6 @@ public struct NOURLEncoding: ParameterEncoding {
         return components
     }
 
-    //escaping function where we can select symbols which we want to escape
-    //(I just removed + for example)
     public func escape(_ string: String) -> String {
         let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
         let subDelimitersToEncode = "!$&'()*,;="

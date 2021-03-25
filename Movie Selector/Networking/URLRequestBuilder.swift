@@ -26,14 +26,13 @@ extension URLRequestBuilder {
     }
     
     var requestURL: URL {
-//        return baseURL.appendingPathComponent(path, isDirectory: false)
         return URL(string: Constants.BASE_URL+Constants.FETCH_POPULAR_MOVIES_PATH)!
     }
     
     var encoding: ParameterEncoding {
         switch method {
         case .get:
-            return NOURLEncoding()
+            return NoURLEncoding()
         default:
             return JSONEncoding.default
         }
@@ -54,8 +53,6 @@ extension URLRequestBuilder {
     }
     
     public func asURLRequest() throws -> URLRequest {
-//        return try encoding.encode(urlRequest, with: parameters)
         return try encoding.encode(urlRequest, with: parameters)
-//        return urlRequest
     }
 }

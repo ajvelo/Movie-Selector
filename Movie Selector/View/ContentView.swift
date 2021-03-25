@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView : View {
     @ObservedObject var viewmodel = MovieViewModel()
+    @State var currentPage = 1
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
@@ -19,7 +20,12 @@ struct ContentView : View {
                     if (viewmodel.movies.results.count > 0) {
                         List(viewmodel.movies.results) { movie in
                             NavigationLink(destination: MovieDetails(movie: movie)){
-                                MovieRow(movie: movie)
+                                MovieRow(movie: movie).onAppear {
+                                    if movie == viewmodel.movies.results.last {
+                                        currentPage += 1
+                                        self.viewmodel.load(page: currentPage)
+                                    }
+                                }
                             }
                         }
                     } else {
@@ -30,7 +36,7 @@ struct ContentView : View {
                 }
             }
             .onAppear {
-                self.viewmodel.load()
+                self.viewmodel.load(page: currentPage)
             }
             .navigationBarTitle(Text("Movies"))
         }

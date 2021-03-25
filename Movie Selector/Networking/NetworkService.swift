@@ -22,8 +22,6 @@ extension NetworkServiceProtocol {
             .subscribe(on: DispatchQueue(label: "Background Queue", qos: .background))
             .receive(on: RunLoop.main)
             .sink { result in
-                // https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=c70adf12d2fd7e4e257a833db67fbc87&page=1
-                print(result.response)
                 if let value = result.value {
                     completion(Result.success(value))
                 } else if let error = result.error {
