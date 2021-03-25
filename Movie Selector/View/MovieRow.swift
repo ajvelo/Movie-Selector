@@ -13,7 +13,7 @@ struct MovieRow : View {
     
     var body: some View {
         HStack {
-            URLImage(url: URL(string:  "\(BASE_IMAGE_URL)\(movie.poster_path)")!) { image in
+            URLImage(url: URL(string:  "\(Constants.BASE_IMAGE_URL)\(movie.poster_path)")!) { image in
                 image.resizable()
                     .frame(width: 90, height: 120)
                 

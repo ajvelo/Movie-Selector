@@ -12,7 +12,7 @@ struct MovieDetails : View {
     var movie: Movie
     var body: some View {
         VStack {
-            URLImage(url: URL(string:  "\(BASE_IMAGE_URL)\(movie.poster_path)")!) {image in
+            URLImage(url: URL(string:  "\(Constants.BASE_IMAGE_URL)\(movie.poster_path)")!) {image in
                 image.resizable()
                     
                     .frame(width: UIScreen.main.bounds.height/8*3, height: UIScreen.main.bounds.height/2)

@@ -30,7 +30,7 @@ struct ContentView : View {
                 }
             }
             .onAppear {
-                self.viewmodel.loadData()
+                self.viewmodel.load()
             }
             .navigationBarTitle(Text("Movies"))
         }
